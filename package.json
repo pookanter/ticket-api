@@ -1,10 +1,23 @@
 {
+  "scripts": {
+    "dev": "export NODE_ENV=development; ts-node-dev -r tsconfig-paths/register app.ts",
+    "dev:db": "docker compose -f docker-compose.yml up -d",
+    "prettier": "prettier --write '**/*.{js,ts}'",
+    "test": "jest --config .jest.config.js --no-cache --detectOpenHandles",
+    "prod:build": "node ./build.js",
+    "prod:start": "prisma generate && prisma migrate deploy && export NODE_ENV=production; node ./dist/index.js"
+  },
   "dependencies": {
     "@koa/multer": "^3.0.2",
     "@types/koa": "^2.15.0",
     "koa": "^2.15.3",
     "reflect-metadata": "^0.2.2",
     "routing-controllers": "^0.10.4",
-    "typedi": "^0.10.0"
+    "tsconfig-paths": "^3.15.0",
+    "typedi": "^0.10.0",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
   }
 }
