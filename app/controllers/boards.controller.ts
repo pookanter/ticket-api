@@ -6,6 +6,6 @@ import { Service } from 'typedi';
 export class BoardsController {
   @Get('/boards')
   async getBoard() {
-    return "Hello World!"
+    return "Hello World!!!!"
   }
 }
