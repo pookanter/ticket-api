@@ -3,7 +3,9 @@ import { Service } from 'typedi'
 
 @Service()
 export class BoardsService {
+  boardsRepository = new BoardsRepository()
+
   getBoard() {
-    return 'Hello World!!!!'
+    return this.boardsRepository.getBoard()
   }
 }
