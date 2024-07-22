@@ -1,6 +1,8 @@
 services:
   mysql:
-    image: mysql
+    build:
+      context: .
+      dockerfile: ./build/mysql/Dockerfile
     environment:
       MYSQL_DATABASE: ticket_dev
       MYSQL_ROOT_USERNAME: root
