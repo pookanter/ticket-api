@@ -1,4 +1,20 @@
 services:
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./build/app/Dockerfile
+  #   environment:
+  #     MYSQL_HOST: mysql
+  #     MYSQL_DATABASE: ticket_dev
+  #     MYSQL_USERNAME: root
+  #     MYSQL_PASSWORD: randomrootpassword
+  #   command: sh -c "npm install && npm run dev"
+  #   expose:
+  #     - "3000"
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/app
   mysql:
     build:
       context: .
