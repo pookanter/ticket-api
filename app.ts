@@ -8,6 +8,6 @@ const app = createExpressServer({
   controllers: [controllers.AuthenController],
 });
 
-app.listen(3000, (app) => {
+app.listen(3000, () => {
   console.log("app is running on port 3000");
 });

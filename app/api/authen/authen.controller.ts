@@ -9,11 +9,12 @@ export class AuthenController {
 
   @Get("")
   index() {
-    return "test";
+    return "AuthenController";
   }
 
   @Post("/sign-up")
   async signUp(@Body() body: SignUpDto) {
+    console.log(JSON.stringify(body, null, 4));
     return this.authenService.signUp(body);
   }
 }

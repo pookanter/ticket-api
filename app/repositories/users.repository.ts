@@ -25,7 +25,7 @@ export class UsersRepository implements IUsersRepository {
   public users: UsersEntity[];
 
   findUserByEmail(email: string): Promise<UsersEntity[]> {
-    return this.db.select("*").where({ email }).limit(1);
+    return this.db.clone().where({ email }).limit(1);
   }
   createUser({
     email,
@@ -38,7 +38,7 @@ export class UsersRepository implements IUsersRepository {
     lastname: string;
     password: string;
   }): Promise<number[]> {
-    return this.db.insert({
+    return this.db.clone().insert({
       [UsersAttributes.Email]: email,
       [UsersAttributes.Name]: name,
       [UsersAttributes.Lastname]: lastname,
@@ -46,6 +46,6 @@ export class UsersRepository implements IUsersRepository {
     });
   }
   getUserById(id: number): Promise<UsersEntity[]> {
-    return this.db.select("*").where({ id }).limit(1);
+    return this.db.clone().select("*").where({ id }).limit(1);
   }
 }
