@@ -7,6 +7,24 @@ export class AuthenService {
   @Inject(() => UsersRepository)
   usersRepository: IUsersRepository;
 
+  async signIn({ email, password }: { email: string; password: string }) {
+    const [user] = await this.usersRepository.findUserByEmail(email);
+
+    if (!user) {
+      throw new BadRequestError("Invalid password or email");
+    }
+
+    const isMatch = await Authen.comparePassword(password, user.password);
+
+    if (!isMatch) {
+      throw new BadRequestError("Invalid password or email");
+    }
+
+    return Authen.gerateToken({
+      user_id: user.id,
+    });
+  }
+
   async signUp({
     email,
     name,

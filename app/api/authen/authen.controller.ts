@@ -1,6 +1,6 @@
 import { Body, Get, JsonController, Post } from "routing-controllers";
 import Container from "typedi";
-import { SignUpDto } from "./dto";
+import { SignInDto, SignUpDto } from "./dto";
 import { AuthenService } from "./authen.service";
 
 @JsonController()
@@ -12,9 +12,13 @@ export class AuthenController {
     return "AuthenController";
   }
 
+  @Post("/sign-in")
+  signIn(@Body() body: SignInDto) {
+    return this.authenService.signIn(body);
+  }
+
   @Post("/sign-up")
-  async signUp(@Body() body: SignUpDto) {
-    console.log(JSON.stringify(body, null, 4));
+  signUp(@Body() body: SignUpDto) {
     return this.authenService.signUp(body);
   }
 }

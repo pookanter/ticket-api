@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcryptjs";
 import { readFileSync } from "fs";
+import environment from "config/environment";
 
-const privateKey = readFileSync("./certs/private_key.pem", "utf-8");
+const privateKey = readFileSync(environment.private_key, "utf-8");
 
 export const Authen = {
   comparePassword(password: string, hash: string) {
@@ -12,18 +13,18 @@ export const Authen = {
     return bcrypt.hash(password, 10);
   },
   gerateToken(tokenPayload: { [key: string]: any }) {
-    const accessToken = jwt.sign(tokenPayload, privateKey, {
+    const access_token = jwt.sign(tokenPayload, privateKey, {
       algorithm: "RS256",
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: environment.access_token_expire,
     });
-    const refreshToken = jwt.sign(tokenPayload, privateKey, {
+    const refresh_token = jwt.sign(tokenPayload, privateKey, {
       algorithm: "RS256",
-      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+      expiresIn: environment.refresh_token_expire,
     });
 
     return {
-      accessToken,
-      refreshToken,
+      access_token,
+      refresh_token,
     };
   },
   verifyToken(token: string) {
