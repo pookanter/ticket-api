@@ -91,4 +91,11 @@ export const authenServiceTest = () => {
       await authenService.signUp(parameter).should.eventually.be.rejectedWith(BadRequestError);
     });
   });
+  describe("refreshToken", () => {
+    it("should return token", async () => {
+      const tokens = await authenService.refreshToken("adklnadlnmalkdmlakdmla");
+
+      Object.keys(tokens).should.be.deep.equal(["access_token", "refresh_token"]);
+    });
+  });
 };

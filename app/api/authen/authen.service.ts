@@ -69,4 +69,12 @@ export class AuthenService {
       message: "user created",
     };
   }
+
+  async refreshToken(token: string) {
+    const claims = this.authentication.verifyToken(token) as {
+      user_id: number;
+    };
+
+    return this.authentication.generateToken(claims);
+  }
 }

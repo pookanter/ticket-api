@@ -17,6 +17,8 @@ export class AuthenticationMock implements IAuthentication {
     };
   }
   verifyToken(token: string): { [key: string]: any } | undefined {
-    return {};
+    return {
+      user_id: 0,
+    };
   }
 }
