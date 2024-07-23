@@ -1,6 +1,6 @@
-import { IsString } from "class-validator";
+import { IsString, IsStrongPassword } from "class-validator";
 
-export class SignUp {
+export class SignUpDto {
   @IsString()
   name: string;
 
@@ -11,5 +11,6 @@ export class SignUp {
   email: string;
 
   @IsString()
+  @IsStrongPassword()
   password: string;
 }
