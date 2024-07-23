@@ -13,11 +13,11 @@ export interface IAuthentication {
     access_token: string;
     refresh_token: string;
   };
-  verifyToken(token: string):
-    | {
-        [key: string]: any;
-      }
-    | undefined;
+  verifyToken(token: string): {
+    user_id: number;
+    iat: number;
+    exp: number;
+  };
 }
 
 @Service()
@@ -46,17 +46,13 @@ export class Authentication implements IAuthentication {
       refresh_token,
     };
   }
-  verifyToken(token: string):
-    | {
-        [key: string]: any;
-      }
-    | undefined {
+  verifyToken(token: string): {
+    user_id: number;
+    iat: number;
+    exp: number;
+  } {
     return jwt.verify(token, privateKey, {
       algorithms: ["RS256"],
-    }) as
-      | {
-          [key: string]: any;
-        }
-      | undefined;
+    }) as any;
   }
 }
