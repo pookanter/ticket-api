@@ -11,7 +11,6 @@ export const Authen = {
   hashPassword(password: string) {
     return bcrypt.hash(password, 10);
   },
-
   gerateToken(tokenPayload: { [key: string]: any }) {
     const accessToken = jwt.sign(tokenPayload, privateKey, {
       algorithm: "RS256",
