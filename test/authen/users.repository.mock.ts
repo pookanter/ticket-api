@@ -3,6 +3,9 @@ import { IUsersRepository } from "app/repositories";
 
 export class UsersRepositoryMock implements IUsersRepository {
   public users: UsersEntity[] = [];
+  constructor() {
+    console.log("UsersRepositoryMock is initialize");
+  }
 
   async findUserByEmail(email: string): Promise<UsersEntity[]> {
     return this.users.filter((x) => x.email == email);
@@ -24,7 +27,7 @@ export class UsersRepositoryMock implements IUsersRepository {
     };
     this.users.push(user);
 
-    return [this.users.length + 1];
+    return [user.id];
   }
   async getUserById(id: number): Promise<UsersEntity[]> {
     return this.users.filter((x) => x.id == id);
