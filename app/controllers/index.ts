@@ -1,2 +1,2 @@
 export * from "./boards.controller";
-export * from "./authen.controller";
+export * from "../api/authen/authen.controller";

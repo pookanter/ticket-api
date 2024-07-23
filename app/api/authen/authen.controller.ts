@@ -1,12 +1,11 @@
 import { Body, Get, JsonController, Post } from "routing-controllers";
-import { Service } from "typedi";
+import Container from "typedi";
 import { SignUpDto } from "./dto";
 import { AuthenService } from "./authen.service";
 
 @JsonController()
-@Service()
 export class AuthenController {
-  constructor(private authenService: AuthenService) {}
+  authenService: AuthenService = Container.get(AuthenService);
 
   @Get("")
   index() {

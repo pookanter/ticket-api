@@ -1,9 +1,28 @@
 import { USERS_TABLE, UsersAttributes, UsersEntity } from "app/entities";
 import * as knexConfig from "../../knexfile";
 import { knex } from "knex";
+import { Service } from "typedi";
 
-export class UsersRepository {
-  db = knex(knexConfig).table(USERS_TABLE);
+export interface IUsersRepository {
+  users: UsersEntity[];
+  findUserByEmail(email: string): Promise<UsersEntity[]>;
+  createUser({
+    email,
+    name,
+    lastname,
+    password,
+  }: {
+    email: string;
+    name: string;
+    lastname: string;
+    password: string;
+  }): Promise<number[]>;
+  getUserById(id: number): Promise<UsersEntity[]>;
+}
+@Service()
+export class UsersRepository implements IUsersRepository {
+  private db = knex(knexConfig).table(USERS_TABLE);
+  public users: UsersEntity[];
 
   findUserByEmail(email: string): Promise<UsersEntity[]> {
     return this.db.select("*").where({ email }).limit(1);

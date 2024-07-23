@@ -1,1 +1,1 @@
-export * as AuthenDto from "./authen";
+export * as AuthenDto from "../api/authen/dto";

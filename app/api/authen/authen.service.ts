@@ -1,10 +1,10 @@
-import { UsersRepository } from "app/repositories";
+import { IUsersRepository, UsersRepository } from "app/repositories";
 import { BadRequestError, InternalServerError, NotFoundError } from "routing-controllers";
-import { Service } from "typedi";
-
+import { Inject, Service } from "typedi";
 @Service()
 export class AuthenService {
-  usersRepository: UsersRepository;
+  @Inject(() => UsersRepository)
+  usersRepository: IUsersRepository;
 
   async signUp({
     email,
@@ -20,13 +20,13 @@ export class AuthenService {
     const users = await this.usersRepository.findUserByEmail(email);
 
     if (users.length > 0) {
-      return new NotFoundError("User already exists");
+      throw new BadRequestError("User already exists");
     }
 
     const [userId] = await this.usersRepository.createUser({ email, name, lastname, password });
 
     if (!userId) {
-      return new InternalServerError("Failed to create user");
+      throw new InternalServerError("Failed to create user");
     }
 
     return userId;

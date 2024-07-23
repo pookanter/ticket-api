@@ -1,0 +1,16 @@
+{
+  "spec": "test/**/*.spec.ts",
+  "require": [
+    "ts-node/register",
+    "tsconfig-paths/register"
+  ],
+  "extensions": [
+    "ts"
+  ],
+  "reporter": "spec",
+  "watch-files": [
+    "test/*.*.ts",
+    "test/**/*.*.ts",
+    "test/**/**/*.*.ts"
+  ]
+}

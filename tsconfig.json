@@ -27,7 +27,8 @@
     "app/**/*",
     "configs/**/*",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "test/**/*"
   ],
   "files": [
     "app.ts",
